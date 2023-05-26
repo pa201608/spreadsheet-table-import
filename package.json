@@ -4,6 +4,17 @@
   "description": "Reading and interpreting of spreadsheet table",
   "author": "pje <pje@xhub.io>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pa201608/spreadsheet-table-import.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pa201608/spreadsheet-table-import/issues"
+  },
+  "homepage": "https://github.com/pa201608/spreadsheet-table-import#readme",
   "scripts": {
     "coverage": "nyc --reporter=html npm run test",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
