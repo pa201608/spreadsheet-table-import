@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "removeComments": true,
+    "allowJs": true,
+    "preserveConstEnums": true,
+    "module": "commonjs",
+    "target": "ES2020",
+    "noImplicitAny": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "lib": [
+      "ES2020"
+    ],
+    "outDir": "dist",
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "*": [
+        "types/*"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ]
+    },
+    "baseUrl": "./",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "alwaysStrict": true
+  },
+  "include": [
+    "src/**/*",
+    "test/**/*",
+    "functional_test/**/*"
+  ],
+  "exclude": [
+    "unit_test/**/*"
+  ]
+}
