@@ -1,15 +1,14 @@
 import { faker } from '@faker-js/faker/locale/de'
 import * as fs from 'fs'
-import { ICase } from './data/models/ICase'
-import { ISection } from './data/models/ISection'
+import { ITableCase, ITableSection } from './data/models/ITableCase'
 
 const NUMBER_OF_CASES: number = 10
-const CASES: ICase[] = []
+const CASES: ITableCase[] = []
 let caseId: number = 0
 
 const casesNumber: number = Number(process.argv[2] || NUMBER_OF_CASES)
 
-function createRandomCase(): ICase
+function createRandomCase(): ITableCase
 {
   let name: string = `case ${caseId}`
 
@@ -30,9 +29,9 @@ fs.writeFile('./gen_cases.json', JSON.stringify(CASES, null, 2), (err) =>
   console.log('Cases-JSON data are saved.')
 })
 
-function createRandomSections(): ISection[]
+function createRandomSections(): ITableSection[]
 {
-  let sections: ISection[] = []
+  let sections: ITableSection[] = []
   let sectionId: number = 0
 
   for (let i = 0; i < 10; i++)
@@ -43,25 +42,23 @@ function createRandomSections(): ISection[]
   return sections
 }
 
-function createRandomSection(): ISection
+function createRandomSection(): ITableSection
 {
   let sectionId: number = 0
   let key: string = `key ${sectionId}`
   let index: number = sectionId
   let description: string = `description ${sectionId}`
   let value: string = `value ${sectionId}`
-  let result1: number = 11
-  let result2: number = 22
-  let selectedResult: number = 11
+  let result: string = '11'
 
   return {
     key: key,
     index: index,
     description: description,
     value: value,
-    result1: result1,
-    result2: result2,
-    selectedResult: selectedResult
+    type: 'asdasd',
+    result: result,
+    required: 'true'
   }
 }
 

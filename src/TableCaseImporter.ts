@@ -1,7 +1,6 @@
 import XLSX, { WorkSheet } from 'xlsx'
 import { logger } from './utils/Logger'
-import { ICase } from './data/models/ICase'
-import { ISection } from './data/models/ISection'
+import { ITableCase, ITableSection } from './data/models/ITableCase'
 
 /**
  * This class reads a spreadsheet file and returns the data as an array of ICase objects.
@@ -18,7 +17,7 @@ export default class SpreadSheetImporter
 {
   fieldNameSequence: number = 0
   tables: any = {}
-  cases: ICase[] = []
+  cases: ITableCase[] = []
   numberOfCases: number = 3
   numberOfHeaderlines: number = 2
 
@@ -27,7 +26,7 @@ export default class SpreadSheetImporter
    * 
    * @param filename {string} The Spreadsheet file to load
    */
-  readSpreadsheet(filename: string): ICase[]
+  readSpreadsheet(filename: string): ITableCase[]
   {
     if (filename === undefined) { throw new Error('load: No file name given.') }
 
@@ -53,19 +52,19 @@ export default class SpreadSheetImporter
     return this.cases
   }
 
-  parseJson(jsonData: unknown[], numberOfCases: number): ICase[]
+  parseJson(jsonData: unknown[], numberOfCases: number): ITableCase[]
   {
     logger.info(`Parsing the sheet with number of cases = ${numberOfCases}, '${JSON.stringify(jsonData)}'.`)
     let caseIndex = 0
     let caseName = `Case ${caseIndex}`
-    let cases: ICase[] = []
+    let cases: ITableCase[] = []
 
     for (let index = 1; index <= numberOfCases; index++)
     {
       caseIndex = index
       caseName = `Case ${caseIndex}`
 
-      const sections: ISection[] = jsonData
+      const sections: ITableSection[] = jsonData
         .filter((sectionData: any) =>
         {
           return sectionData.hasOwnProperty(caseName) && sectionData['key'] !== undefined
@@ -73,8 +72,7 @@ export default class SpreadSheetImporter
         .map((sectionData: any) =>
         {
           let selectedResult = sectionData[caseName]
-          const { key, index, description, value, result1, result2 } = sectionData
-          return { key, index, description, value, result1, result2, selectedResult }
+          return { ...sectionData, selectedResult }
         })
 
       cases.push({ name: caseName, sections })
